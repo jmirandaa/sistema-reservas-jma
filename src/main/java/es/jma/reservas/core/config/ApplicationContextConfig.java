@@ -48,9 +48,9 @@ public class ApplicationContextConfig {
     public DataSource getDataSource() {
     	BasicDataSource dataSource = new BasicDataSource();
     	dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-    	dataSource.setUrl("jdbc:mysql://vps81773.ovh.net:3306/SistemaReservas");
-    	dataSource.setUsername("root");
-    	dataSource.setPassword("bsg-075-William-Adama");
+    	dataSource.setUrl("jdbc:mysql://url:3306/SistemaReservas");
+    	dataSource.setUsername("username");
+    	dataSource.setPassword("secret");
     	
     	return dataSource;
     }
