@@ -13,10 +13,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.orm.hibernate3.HibernateTransactionManager;
+import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+
+import es.jma.reservas.core.dominio.citas.Cita;
+import es.jma.reservas.core.dominio.citas.Horario;
+import es.jma.reservas.core.dominio.citas.Slot;
+import es.jma.reservas.core.dominio.negocio.Negocio;
+import es.jma.reservas.core.dominio.servicios.Servicio;
+import es.jma.reservas.core.dominio.usuarios.AbstractPersona;
+import es.jma.reservas.core.dominio.usuarios.Cliente;
+import es.jma.reservas.core.dominio.usuarios.Empleado;
+import es.jma.reservas.core.dominio.usuarios.Usuario;
+import es.jma.reservas.core.servicios.IServiciosUsuario;
+import es.jma.reservas.core.servicios.impl.ServiciosUsuario;
 
 /**
  * Clase de configuración del contexto de Spring
@@ -48,9 +60,9 @@ public class ApplicationContextConfig {
     public DataSource getDataSource() {
     	BasicDataSource dataSource = new BasicDataSource();
     	dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-    	dataSource.setUrl("jdbc:mysql://url:3306/SistemaReservas");
-    	dataSource.setUsername("username");
-    	dataSource.setPassword("secret");
+    	dataSource.setUrl("jdbc:mysql://vps81773.ovh.net:3306/SistemaReservas");
+    	dataSource.setUsername("root");
+    	dataSource.setPassword("bsg-075-William-Adama");
     	
     	return dataSource;
     }
@@ -77,7 +89,15 @@ public class ApplicationContextConfig {
     public SessionFactory getSessionFactory(DataSource dataSource) {
     	LocalSessionFactoryBuilder sessionBuilder = new LocalSessionFactoryBuilder(dataSource);
     	sessionBuilder.addProperties(getHibernateProperties());
-    	//sessionBuilder.addAnnotatedClasses(Bar.class);
+    	sessionBuilder.addAnnotatedClasses(Cita.class);
+    	sessionBuilder.addAnnotatedClasses(Horario.class);
+    	sessionBuilder.addAnnotatedClasses(Slot.class);
+    	sessionBuilder.addAnnotatedClasses(Negocio.class);
+    	sessionBuilder.addAnnotatedClasses(Servicio.class);
+    	sessionBuilder.addAnnotatedClasses(AbstractPersona.class);
+    	sessionBuilder.addAnnotatedClasses(Cliente.class);
+    	sessionBuilder.addAnnotatedClasses(Empleado.class);
+    	sessionBuilder.addAnnotatedClasses(Usuario.class);
     	return sessionBuilder.buildSessionFactory();
     }
     
@@ -90,4 +110,11 @@ public class ApplicationContextConfig {
 
 		return transactionManager;
 	}
+	
+    @Autowired
+    @Bean(name = "serviciosUsuario")
+    public IServiciosUsuario getIServiciosBar(SessionFactory sessionFactory) {
+    	ServiciosUsuario serviciosUsuario = ServiciosUsuario.getInstance(sessionFactory);
+    	return serviciosUsuario;
+    }
 }
