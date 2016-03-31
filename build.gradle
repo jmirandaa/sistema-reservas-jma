@@ -45,6 +45,8 @@ dependencies {
 	compile 'org.apache.commons:commons-dbcp2:2.0'
 	compile 'mysql:mysql-connector-java:5.1.30'
 	
+	//Guava
+	compile 'com.google.guava:guava:19.0'
 }
 
 test {

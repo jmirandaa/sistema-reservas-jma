@@ -27,7 +27,11 @@ import es.jma.reservas.core.dominio.usuarios.AbstractPersona;
 import es.jma.reservas.core.dominio.usuarios.Cliente;
 import es.jma.reservas.core.dominio.usuarios.Empleado;
 import es.jma.reservas.core.dominio.usuarios.Usuario;
+import es.jma.reservas.core.servicios.IServiciosCliente;
+import es.jma.reservas.core.servicios.IServiciosNegocio;
 import es.jma.reservas.core.servicios.IServiciosUsuario;
+import es.jma.reservas.core.servicios.impl.ServiciosCliente;
+import es.jma.reservas.core.servicios.impl.ServiciosNegocio;
 import es.jma.reservas.core.servicios.impl.ServiciosUsuario;
 
 /**
@@ -116,5 +120,19 @@ public class ApplicationContextConfig {
     public IServiciosUsuario getIServiciosBar(SessionFactory sessionFactory) {
     	ServiciosUsuario serviciosUsuario = ServiciosUsuario.getInstance(sessionFactory);
     	return serviciosUsuario;
+    }
+    
+    @Autowired
+    @Bean(name = "serviciosNegocio")
+    public IServiciosNegocio getIServiciosNegocio(SessionFactory sessionFactory) {
+    	ServiciosNegocio serviciosNegocio = ServiciosNegocio.getInstance(sessionFactory);
+    	return serviciosNegocio;
+    }
+    
+    @Autowired
+    @Bean(name = "serviciosCliente")
+    public IServiciosCliente getIServiciosCliente(SessionFactory sessionFactory) {
+    	ServiciosCliente serviciosCliente = ServiciosCliente.getInstance(sessionFactory);
+    	return serviciosCliente;
     }
 }

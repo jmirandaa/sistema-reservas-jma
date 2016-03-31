@@ -37,9 +37,9 @@ public class Negocio implements Serializable{
 	private String telefono;
 	private String url;
 	private String tipo;
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	private List <AbstractPersona> personas;
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	private List <Slot> slots;
 	private boolean slotsFijos;
 	

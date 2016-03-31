@@ -27,11 +27,11 @@ public class Empleado extends AbstractPersona implements Serializable{
 	 */
 	private static final long serialVersionUID = -6497607736335993851L;
 	//Atributos
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	private List<Servicio> servicios;
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy="empleado")
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="empleado")
 	private List <Cita> citas;
-	@ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	private List <Horario> horario;
 	
 	//Constructores

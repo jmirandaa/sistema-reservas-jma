@@ -31,11 +31,11 @@ public class Slot implements Serializable{
 	private long id;
 	private String descripcion;
 	private int capacidadMax;
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy="slot")
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="slot")
 	private List <Cita> citas;
 	
 	//Constructores
-	private Slot()
+	public Slot()
 	{
 		
 	}

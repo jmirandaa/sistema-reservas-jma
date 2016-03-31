@@ -22,4 +22,5 @@ public interface IHibernateDAO {
 	 * @param session
 	 */
 	public void setSession(Session session);
+	
 }

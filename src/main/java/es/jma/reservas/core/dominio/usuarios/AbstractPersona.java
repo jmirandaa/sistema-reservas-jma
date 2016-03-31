@@ -5,6 +5,8 @@ package es.jma.reservas.core.dominio.usuarios;
 
 import java.io.Serializable;
 import java.util.Date;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -27,7 +29,7 @@ public abstract class AbstractPersona implements Serializable{
 	@Id
 	@GeneratedValue
 	protected long id;
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(cascade=CascadeType.ALL,fetch = FetchType.EAGER)
 	protected Usuario usuario;
 	protected String nombre;
 	protected String apellidos;

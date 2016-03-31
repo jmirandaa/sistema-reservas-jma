@@ -10,6 +10,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+import es.jma.reservas.core.daos.ICrudDAO;
 import es.jma.reservas.core.daos.IUsuarioDAO;
 import es.jma.reservas.core.daos.impl.UsuarioDAOHibImpl;
 import es.jma.reservas.core.dominio.usuarios.Usuario;
@@ -241,6 +242,11 @@ public class ServiciosUsuario extends ServiciosHibernate implements
 		}
 		
 		return usuario;
+	}
+
+	@Override
+	protected ICrudDAO getCrudDAO() {
+		return null;
 	}
 
 }
