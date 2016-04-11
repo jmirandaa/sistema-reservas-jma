@@ -15,5 +15,5 @@ public interface INegocioDAO extends ICrudDAO{
 	 * @param id
 	 * @return
 	 */
-	public Negocio consultarNegocioId(int id);
+	public Negocio consultarNegocioId(int id) throws Exception;
 }

@@ -28,10 +28,16 @@ import es.jma.reservas.core.dominio.usuarios.Cliente;
 import es.jma.reservas.core.dominio.usuarios.Empleado;
 import es.jma.reservas.core.dominio.usuarios.Usuario;
 import es.jma.reservas.core.servicios.IServiciosCliente;
+import es.jma.reservas.core.servicios.IServiciosEmpleado;
 import es.jma.reservas.core.servicios.IServiciosNegocio;
+import es.jma.reservas.core.servicios.IServiciosServicios;
+import es.jma.reservas.core.servicios.IServiciosSlot;
 import es.jma.reservas.core.servicios.IServiciosUsuario;
 import es.jma.reservas.core.servicios.impl.ServiciosCliente;
+import es.jma.reservas.core.servicios.impl.ServiciosEmpleado;
 import es.jma.reservas.core.servicios.impl.ServiciosNegocio;
+import es.jma.reservas.core.servicios.impl.ServiciosServicio;
+import es.jma.reservas.core.servicios.impl.ServiciosSlot;
 import es.jma.reservas.core.servicios.impl.ServiciosUsuario;
 
 /**
@@ -134,5 +140,26 @@ public class ApplicationContextConfig {
     public IServiciosCliente getIServiciosCliente(SessionFactory sessionFactory) {
     	ServiciosCliente serviciosCliente = ServiciosCliente.getInstance(sessionFactory);
     	return serviciosCliente;
+    }
+    
+    @Autowired
+    @Bean(name = "serviciosEmpleado")
+    public IServiciosEmpleado getIServiciosEmpleado(SessionFactory sessionFactory) {
+    	ServiciosEmpleado serviciosEmpleado = ServiciosEmpleado.getInstance(sessionFactory);
+    	return serviciosEmpleado;
+    }
+    
+    @Autowired
+    @Bean(name = "serviciosServicios")
+    public IServiciosServicios getIServiciosServicio(SessionFactory sessionFactory) {
+    	ServiciosServicio serviciosServicios = ServiciosServicio.getInstance(sessionFactory);
+    	return serviciosServicios;
+    }
+    
+    @Autowired
+    @Bean(name = "serviciosSlot")
+    public IServiciosSlot getIServiciosSlot(SessionFactory sessionFactory) {
+    	ServiciosSlot serviciosSlot = ServiciosSlot.getInstance(sessionFactory);
+    	return serviciosSlot;
     }
 }

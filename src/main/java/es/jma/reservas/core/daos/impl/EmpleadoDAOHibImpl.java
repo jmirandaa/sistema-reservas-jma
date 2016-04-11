@@ -9,38 +9,42 @@ import java.util.List;
 import org.hibernate.Query;
 import org.springframework.transaction.annotation.Transactional;
 
-import es.jma.reservas.core.daos.IClienteDAO;
+import es.jma.reservas.core.daos.IEmpleadoDAO;
 import es.jma.reservas.core.dominio.negocio.Negocio;
 import es.jma.reservas.core.dominio.usuarios.AbstractPersona;
-import es.jma.reservas.core.dominio.usuarios.Cliente;
+import es.jma.reservas.core.dominio.usuarios.Empleado;
 
 /**
  * @author jmiranda
  *
  */
-public class ClienteDAOHibImpl extends CrudDAOHibImpl implements IClienteDAO{
-	private static ClienteDAOHibImpl instance;
+public class EmpleadoDAOHibImpl extends CrudDAOHibImpl implements IEmpleadoDAO {
+	public static EmpleadoDAOHibImpl instance;
 	
 	//Singleton
-	private ClienteDAOHibImpl()
+	private EmpleadoDAOHibImpl()
 	{
-		super(Cliente.class);
+		super(Empleado.class);
 	}
 	
-	public static ClienteDAOHibImpl getInstance()
+	public static EmpleadoDAOHibImpl getInstance()
 	{
 		if (instance == null)
 		{
-			instance = new ClienteDAOHibImpl();
+			instance = new EmpleadoDAOHibImpl();
 		}
 		
 		return instance;
 	}
-
+	
+	/* (non-Javadoc)
+	 * @see es.jma.reservas.core.daos.IEmpleadoDAO#consultarEmpleadosNegocio(es.jma.reservas.core.dominio.negocio.Negocio)
+	 */
 	@Override
 	@Transactional
-	public List<Cliente> consultarClientesNegocio(Negocio negocio) throws Exception{
-		List<Cliente> clientes = new ArrayList<Cliente> ();
+	public List<Empleado> consultarEmpleadosNegocio(Negocio negocio)
+			throws Exception {
+		List<Empleado> empleados = new ArrayList<Empleado> ();
 		
 		try
 		{
@@ -55,10 +59,10 @@ public class ClienteDAOHibImpl extends CrudDAOHibImpl implements IClienteDAO{
 			{
 				for (AbstractPersona persona : results)
 				{
-					if (persona instanceof Cliente)
+					if (persona instanceof Empleado)
 					{
-						Cliente cliente = (Cliente) persona;
-						clientes.add(cliente);
+						Empleado empleado = (Empleado) persona;
+						empleados.add(empleado);
 					}
 				}
 			}
@@ -67,12 +71,16 @@ public class ClienteDAOHibImpl extends CrudDAOHibImpl implements IClienteDAO{
 		{
 			throw e;
 		}
-		return clientes;
+		return empleados;
 	}
 
+	/* (non-Javadoc)
+	 * @see es.jma.reservas.core.daos.IEmpleadoDAO#guardarEmpleadoNegocio(es.jma.reservas.core.dominio.usuarios.Empleado, es.jma.reservas.core.dominio.negocio.Negocio)
+	 */
 	@Override
 	@Transactional
-	public void guardarClienteNegocio(Cliente cliente, Negocio negocio) throws Exception {
+	public void guardarEmpleadoNegocio(Empleado empleado, Negocio negocio)
+			throws Exception {
 		try
 		{
 			List <AbstractPersona> personas = negocio.getPersonas();
@@ -81,13 +89,14 @@ public class ClienteDAOHibImpl extends CrudDAOHibImpl implements IClienteDAO{
 				personas = new ArrayList<AbstractPersona> ();
 				negocio.setPersonas(personas);
 			}
-			negocio.getPersonas().add(cliente);
+			negocio.getPersonas().add(empleado);
 			this.nuevo(negocio);
 		}
 		catch (Exception e)
 		{
 			throw e;
 		}
-		
+
 	}
+
 }

@@ -26,11 +26,16 @@ import es.jma.reservas.core.daos.impl.ClienteDAOHibImpl;
 import es.jma.reservas.core.daos.impl.NegocioDAOHibImpl;
 import es.jma.reservas.core.dominio.citas.Slot;
 import es.jma.reservas.core.dominio.negocio.Negocio;
+import es.jma.reservas.core.dominio.servicios.Servicio;
 import es.jma.reservas.core.dominio.usuarios.AbstractPersona;
 import es.jma.reservas.core.dominio.usuarios.Cliente;
+import es.jma.reservas.core.dominio.usuarios.Empleado;
 import es.jma.reservas.core.dominio.usuarios.Usuario;
 import es.jma.reservas.core.servicios.IServiciosCliente;
+import es.jma.reservas.core.servicios.IServiciosEmpleado;
 import es.jma.reservas.core.servicios.IServiciosNegocio;
+import es.jma.reservas.core.servicios.IServiciosServicios;
+import es.jma.reservas.core.servicios.IServiciosSlot;
 import es.jma.reservas.core.servicios.IServiciosUsuario;
 
 /**
@@ -48,6 +53,12 @@ public class TestUsuariosRest {
 	IServiciosNegocio serviciosNegocio;
 	@Autowired
 	IServiciosCliente serviciosCliente;
+	@Autowired
+	IServiciosEmpleado serviciosEmpleado;
+	@Autowired
+	IServiciosServicios serviciosServicio;
+	@Autowired
+	IServiciosSlot serviciosSlot;
 	
 	 @RequestMapping(value = "services/testNuevoUsuario", method = RequestMethod.GET,consumes ="*/*",produces = "application/json")
 	 @ResponseBody
@@ -114,15 +125,46 @@ public class TestUsuariosRest {
 				cliente.setDni("12345689N");
 				cliente.setFechaNacimiento(new Date());
 				cliente.setNombre("James T.");
+				
+				Usuario usuario2 = new Usuario();
+				usuario2.setNivel(Usuario.NIVEL_EMPLEADO);
+				usuario2.setNombreUsuario("billAdama");
+				usuario2.setPassword("almirante");
+				
+				Empleado empleado = new Empleado();
+				empleado.setUsuario(usuario2);
+				empleado.setApellidos("Adama");
+				empleado.setDni("33333333L");
+				empleado.setFechaNacimiento(new Date());
+				empleado.setNombre("William");
+				
+				List <Servicio> servicios = new ArrayList<Servicio> ();
+				
+				Servicio servicio = new Servicio();
+				servicio.setNombre("Matar");
+				servicio.setDuracionMin(40);
+				servicio.setCoste(50);
+				servicios.add(servicio);
+				
+				empleado.setServicios(servicios);
+				
+				 Slot slot2 = new Slot();
+				 slot2.setCapacidadMax(3);
+				 slot2.setDescripcion("sala de la risa");
 
 			 serviciosNegocio.nuevo(negocio);
 			 serviciosCliente.guardarClienteNegocio(cliente, negocio);
+			 serviciosEmpleado.guardarEmpleadoNegocio(empleado, negocio);
+			 serviciosSlot.nuevoSlotNegocio(slot2, negocio);
 			 
 			 List<Negocio> negocios = serviciosNegocio.consultarTodos();
 			 System.out.println("lala");
 			 
 			 List<Cliente> clientesNeg = serviciosCliente.consultarClientesNegocio(negocio);
 			 System.out.println("ff");
+			 
+			 List<Servicio> serviciosEmp = serviciosServicio.consultarServiciosEmpleado(empleado);
+			 System.out.println("kk");
 		 }
 		 catch (Exception e)
 		 {

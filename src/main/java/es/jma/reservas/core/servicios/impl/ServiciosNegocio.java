@@ -58,7 +58,7 @@ public class ServiciosNegocio extends ServiciosHibernate implements IServiciosNe
 	 * @see es.jma.reservas.core.daos.INegocioDAO#consultarNegocioId(int)
 	 */
 	@Override
-	public Negocio consultarNegocioId(int id) {
+	public Negocio consultarNegocioId(int id) throws Exception{
 		Negocio resultado = new Negocio ();
 		Session session = null;
 		
