@@ -21,4 +21,12 @@ public interface IServicioDAO extends ICrudDAO {
 	 */
 	public List<Servicio> consultarServiciosEmpleado(Empleado empleado) throws Exception;
 	
+	/**
+	 * Añadir un servicio a un empleado
+	 * @param servicio
+	 * @param empleado
+	 * @throws Exception
+	 */
+	public void nuevoServicioEmpleado (Servicio servicio, Empleado empleado) throws Exception;
+	
 }

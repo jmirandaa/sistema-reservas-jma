@@ -25,7 +25,7 @@ public class Cliente extends AbstractPersona implements Serializable{
 	private static final long serialVersionUID = 2305632930417270601L;
 	//Atributos
 	private String direccion;
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="cliente")
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy="cliente")
 	private List <Cita> citas;
 
 	//Constructores

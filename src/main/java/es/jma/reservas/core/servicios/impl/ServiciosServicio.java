@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
 import es.jma.reservas.core.daos.ICrudDAO;
 import es.jma.reservas.core.daos.IServicioDAO;
@@ -92,6 +93,48 @@ public class ServiciosServicio extends ServiciosHibernate implements
 	@Override
 	protected ICrudDAO getCrudDAO() {
 		return serviciosDAO;
+	}
+
+	@Override
+	public void nuevoServicioEmpleado(Servicio servicio, Empleado empleado) throws Exception {
+		Session session = null;
+    	Transaction tx = null;
+    	
+		try
+		{
+			if (servicio != null)
+			{
+				if (txEnabled)
+				{
+					session = sessionFactory.openSession();
+					tx = session.beginTransaction();
+					serviciosDAO.setSession(session);
+				}
+				else
+				{
+					if (serviciosDAO.getSession() == null)
+					{
+						session = sessionFactory.openSession();
+						tx = session.beginTransaction();
+						serviciosDAO.setSession(session);
+					}
+				}
+				
+				//Guardar
+				serviciosDAO.nuevoServicioEmpleado(servicio, empleado);
+				commit(tx);
+
+			}
+		}
+		catch (Exception e)
+		{
+			rollback(tx);
+			throw e;
+		}
+		finally
+		{
+			cerrarSesion(session);
+		}
 	}
 
 }

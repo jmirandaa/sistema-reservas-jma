@@ -27,14 +27,18 @@ import es.jma.reservas.core.dominio.usuarios.AbstractPersona;
 import es.jma.reservas.core.dominio.usuarios.Cliente;
 import es.jma.reservas.core.dominio.usuarios.Empleado;
 import es.jma.reservas.core.dominio.usuarios.Usuario;
+import es.jma.reservas.core.servicios.IServiciosCita;
 import es.jma.reservas.core.servicios.IServiciosCliente;
 import es.jma.reservas.core.servicios.IServiciosEmpleado;
+import es.jma.reservas.core.servicios.IServiciosHorario;
 import es.jma.reservas.core.servicios.IServiciosNegocio;
 import es.jma.reservas.core.servicios.IServiciosServicios;
 import es.jma.reservas.core.servicios.IServiciosSlot;
 import es.jma.reservas.core.servicios.IServiciosUsuario;
+import es.jma.reservas.core.servicios.impl.ServiciosCita;
 import es.jma.reservas.core.servicios.impl.ServiciosCliente;
 import es.jma.reservas.core.servicios.impl.ServiciosEmpleado;
+import es.jma.reservas.core.servicios.impl.ServiciosHorario;
 import es.jma.reservas.core.servicios.impl.ServiciosNegocio;
 import es.jma.reservas.core.servicios.impl.ServiciosServicio;
 import es.jma.reservas.core.servicios.impl.ServiciosSlot;
@@ -71,8 +75,8 @@ public class ApplicationContextConfig {
     	BasicDataSource dataSource = new BasicDataSource();
     	dataSource.setDriverClassName("com.mysql.jdbc.Driver");
     	dataSource.setUrl("jdbc:mysql://dir:3306/SistemaReservas");
-    	dataSource.setUsername("user");
-    	dataSource.setPassword("pass");
+    	dataSource.setUsername("username");
+    	dataSource.setPassword("password");
     	
     	return dataSource;
     }
@@ -161,5 +165,19 @@ public class ApplicationContextConfig {
     public IServiciosSlot getIServiciosSlot(SessionFactory sessionFactory) {
     	ServiciosSlot serviciosSlot = ServiciosSlot.getInstance(sessionFactory);
     	return serviciosSlot;
+    }
+    
+    @Autowired
+    @Bean(name = "serviciosHorario")
+    public IServiciosHorario getIServiciosHorario(SessionFactory sessionFactory) {
+    	ServiciosHorario serviciosHorario = ServiciosHorario.getInstance(sessionFactory);
+    	return serviciosHorario;
+    }
+    
+    @Autowired
+    @Bean(name = "serviciosCita")
+    public IServiciosCita getIServiciosCita(SessionFactory sessionFactory) {
+    	ServiciosCita serviciosCita = ServiciosCita.getInstance(sessionFactory);
+    	return serviciosCita;
     }
 }

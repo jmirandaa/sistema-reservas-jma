@@ -67,4 +67,23 @@ public class ServicioDAOHibImpl extends CrudDAOHibImpl implements IServicioDAO {
 		return servicios;
 	}
 
+	@Override
+	public void nuevoServicioEmpleado(Servicio servicio, Empleado empleado) throws Exception {
+		try
+		{
+			List <Servicio> servicios = empleado.getServicios();
+			if (servicios == null)
+			{
+				servicios = new ArrayList<Servicio> ();
+				empleado.setServicios(servicios);
+			}
+			empleado.getServicios().add(servicio);
+			this.nuevo(empleado);
+		}
+		catch (Exception e)
+		{
+			throw e;
+		}
+	}
+
 }

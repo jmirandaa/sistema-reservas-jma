@@ -24,6 +24,8 @@ import es.jma.reservas.core.daos.IClienteDAO;
 import es.jma.reservas.core.daos.INegocioDAO;
 import es.jma.reservas.core.daos.impl.ClienteDAOHibImpl;
 import es.jma.reservas.core.daos.impl.NegocioDAOHibImpl;
+import es.jma.reservas.core.dominio.citas.Cita;
+import es.jma.reservas.core.dominio.citas.Horario;
 import es.jma.reservas.core.dominio.citas.Slot;
 import es.jma.reservas.core.dominio.negocio.Negocio;
 import es.jma.reservas.core.dominio.servicios.Servicio;
@@ -31,8 +33,10 @@ import es.jma.reservas.core.dominio.usuarios.AbstractPersona;
 import es.jma.reservas.core.dominio.usuarios.Cliente;
 import es.jma.reservas.core.dominio.usuarios.Empleado;
 import es.jma.reservas.core.dominio.usuarios.Usuario;
+import es.jma.reservas.core.servicios.IServiciosCita;
 import es.jma.reservas.core.servicios.IServiciosCliente;
 import es.jma.reservas.core.servicios.IServiciosEmpleado;
+import es.jma.reservas.core.servicios.IServiciosHorario;
 import es.jma.reservas.core.servicios.IServiciosNegocio;
 import es.jma.reservas.core.servicios.IServiciosServicios;
 import es.jma.reservas.core.servicios.IServiciosSlot;
@@ -59,6 +63,10 @@ public class TestUsuariosRest {
 	IServiciosServicios serviciosServicio;
 	@Autowired
 	IServiciosSlot serviciosSlot;
+	@Autowired
+	IServiciosHorario serviciosHorario;
+	@Autowired
+	IServiciosCita serviciosCita;
 	
 	 @RequestMapping(value = "services/testNuevoUsuario", method = RequestMethod.GET,consumes ="*/*",produces = "application/json")
 	 @ResponseBody
@@ -151,17 +159,41 @@ public class TestUsuariosRest {
 				 Slot slot2 = new Slot();
 				 slot2.setCapacidadMax(3);
 				 slot2.setDescripcion("sala de la risa");
+				 
+				 Horario horario1 = new Horario();
+				 horario1.setDescripcion("Lunes mañana semana");
+				 horario1.setDiaSemana(0);
+				 horario1.setHoraInicio(new Date());
+				 horario1.setHoraFin(new Date());
+				 
+				 Cita cita1 = new Cita();
+				 cita1.setCliente(cliente);
+				 cita1.setDescripcion("Cita de prueba");
+				 cita1.setEmpleado(empleado);
+				 cita1.setFechaAlta(new Date());
+				 cita1.setFechaCita(new Date());
+				 cita1.setNombre("Cita de prueba");
+				 cita1.setPagada(false);
+				 cita1.setServicio(servicio);
+				 cita1.setSlot(slot1);
 
 			 serviciosNegocio.nuevo(negocio);
 			 serviciosCliente.guardarClienteNegocio(cliente, negocio);
 			 serviciosEmpleado.guardarEmpleadoNegocio(empleado, negocio);
 			 serviciosSlot.nuevoSlotNegocio(slot2, negocio);
+			 serviciosHorario.guardarHorarioEmpleado(horario1, empleado);
+			 serviciosCita.nuevo(cita1);
 			 
 			 List<Negocio> negocios = serviciosNegocio.consultarTodos();
 			 System.out.println("lala");
 			 
 			 List<Cliente> clientesNeg = serviciosCliente.consultarClientesNegocio(negocio);
+			 List<Cita> citasCliente = clientesNeg.get(0).getCitas();
 			 System.out.println("ff");
+			 
+			 List<Empleado> empleadosNeg = serviciosEmpleado.consultarEmpleadosNegocio(negocio);
+			 List<Cita> citasEmpleado = empleadosNeg.get(0).getCitas();
+			 System.out.println("ffk");
 			 
 			 List<Servicio> serviciosEmp = serviciosServicio.consultarServiciosEmpleado(empleado);
 			 System.out.println("kk");
