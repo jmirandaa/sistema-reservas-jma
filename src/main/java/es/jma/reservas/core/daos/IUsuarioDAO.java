@@ -49,4 +49,13 @@ public interface IUsuarioDAO extends IHibernateDAO {
 	 * @throws Exception
 	 */
 	public Usuario consultarUsuarioNombreUsuario(String nombreUsuario) throws Exception;
+	
+	/**
+	 * Comprobar si los datos de un usuario con correctos
+	 * @param nombreUsuario
+	 * @param password
+	 * @return
+	 * @throws Exception
+	 */
+	public boolean comprobarDatosUsuario(String nombreUsuario, String password) throws Exception;
 }

@@ -18,7 +18,8 @@ import es.jma.reservas.core.dominio.usuarios.Cliente;
 import es.jma.reservas.core.servicios.IServiciosCliente;
 
 /**
- * @author jmiranda
+ * Servicio de Cliente
+ * @author Jorge Miranda
  *
  */
 public class ServiciosCliente extends ServiciosHibernate implements

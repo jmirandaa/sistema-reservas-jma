@@ -249,4 +249,41 @@ public class ServiciosUsuario extends ServiciosHibernate implements
 		return null;
 	}
 
+	@Override
+	public boolean comprobarDatosUsuario(String nombreUsuario, String password)
+			throws Exception {
+		Session session = null;
+    	boolean resultado = false;
+		
+		try
+		{
+			if (txEnabled)
+			{
+				session = sessionFactory.openSession();
+				usuarioDAO.setSession(session);
+			}
+			else
+			{
+				if (usuarioDAO.getSession() == null)
+				{
+					session = sessionFactory.openSession();
+				}
+			}
+			
+			//Hacer la consulta
+			resultado = usuarioDAO.comprobarDatosUsuario(nombreUsuario, password);
+			
+		}
+		catch (Exception e)
+		{
+			throw e;
+		}
+		finally
+		{
+			cerrarSesion(session);
+		}
+		
+		return resultado;
+	}
+
 }

@@ -3,6 +3,7 @@
  */
 package es.jma.reservas.pruebasimple.servicios;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -160,18 +161,32 @@ public class TestUsuariosRest {
 				 slot2.setCapacidadMax(3);
 				 slot2.setDescripcion("sala de la risa");
 				 
+				 SimpleDateFormat formatHour = new SimpleDateFormat("HH:mm:ss");
 				 Horario horario1 = new Horario();
+				 Horario horario2 = new Horario();
+				 
 				 horario1.setDescripcion("Lunes mañana semana");
-				 horario1.setDiaSemana(0);
-				 horario1.setHoraInicio(new Date());
-				 horario1.setHoraFin(new Date());
+				 horario2.setDescripcion("Miercoles tarde semana");
+				 horario1.setDiaSemana(1);
+				 horario2.setDiaSemana(3);
+				 Date dateHoraIni1 = formatHour.parse("08:00:00");
+				 Date dateHoraFin1 = formatHour.parse("15:00:00");
+				 Date dateHoraIni2 = formatHour.parse("16:00:00");
+				 Date dateHoraFin2 = formatHour.parse("20:00:00");
+				 
+				 horario1.setHoraInicio(dateHoraIni1);
+				 horario2.setHoraInicio(dateHoraIni2);
+				 horario1.setHoraFin(dateHoraFin1);
+				 horario2.setHoraFin(dateHoraFin2);
+				 
+				 SimpleDateFormat formatCita = new SimpleDateFormat("HH:mm:ss yyyy-MM-dd");
 				 
 				 Cita cita1 = new Cita();
 				 cita1.setCliente(cliente);
 				 cita1.setDescripcion("Cita de prueba");
 				 cita1.setEmpleado(empleado);
 				 cita1.setFechaAlta(new Date());
-				 cita1.setFechaCita(new Date());
+				 cita1.setFechaCita(formatCita.parse("17:00:00 2016-04-13"));
 				 cita1.setNombre("Cita de prueba");
 				 cita1.setPagada(false);
 				 cita1.setServicio(servicio);
@@ -182,7 +197,14 @@ public class TestUsuariosRest {
 			 serviciosEmpleado.guardarEmpleadoNegocio(empleado, negocio);
 			 serviciosSlot.nuevoSlotNegocio(slot2, negocio);
 			 serviciosHorario.guardarHorarioEmpleado(horario1, empleado);
+			 serviciosHorario.guardarHorarioEmpleado(horario2, empleado);
 			 serviciosCita.nuevo(cita1);
+			 			 
+			 Date citaDate = formatCita.parse("13:00:00 2016-04-13");
+			 Date citaDate2 = formatCita.parse("17:00:00 2016-04-13");
+			 //serviciosCita.consultasFranjasLibresDia(empleado, citaDate, servicio, slot1);
+			 serviciosCita.consultasFranjasLibresDia(empleado, citaDate2, servicio, slot1);
+			 //List<Cita> citasDia = serviciosCita.consultarCitasEmpleado(empleado, new Date());
 			 
 			 List<Negocio> negocios = serviciosNegocio.consultarTodos();
 			 System.out.println("lala");

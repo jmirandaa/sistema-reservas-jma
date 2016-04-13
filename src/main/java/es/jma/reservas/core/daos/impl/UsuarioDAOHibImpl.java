@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import es.jma.reservas.core.daos.IUsuarioDAO;
 import es.jma.reservas.core.dominio.usuarios.Usuario;
+import es.jma.reservas.core.utils.UtilCifrado;
 
 /**
  * DAO de Usuario (Hibernate)
@@ -155,6 +156,38 @@ public class UsuarioDAOHibImpl implements IUsuarioDAO {
 		}
 		
 		return usuario;
+	}
+
+	@Override
+	@Transactional
+	public boolean comprobarDatosUsuario(String nombreUsuario, String password)
+			throws Exception {
+		boolean resultado = false;
+		
+		try
+		{
+			//Aplicar cifrado al password
+			String passwordCifrado=UtilCifrado.cifrarTexto(password);
+			
+			//Consultar bar por nombre
+			String hql = "from Usuario where nombreUsuario = :nombreUsuario and password = :password";
+			Query query = session.createQuery(hql);
+			query.setString("nombreUsuario", nombreUsuario);
+			query.setString("password",passwordCifrado);
+			@SuppressWarnings("unchecked")
+			List<Usuario> results = query.list();
+			
+			if ((results != null ) && (results.size() > 0))
+			{
+				resultado = true;
+			}
+		}
+		catch (Exception e)
+		{
+			throw e;
+		}
+		
+		return resultado;
 	}
 
 }
