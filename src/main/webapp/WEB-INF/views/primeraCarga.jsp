@@ -13,7 +13,7 @@
 
 
 <body class="nav-md">
-
+	<span id="primeraCarga"></span>
     <div class="container body">
 
 
@@ -91,6 +91,7 @@
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="x_panel">
                                 <div class="x_title">
+                                	<p id="estadoFormulario" class="errorAjax"></p>
                                     <h2>Datos iniciales</h2>
                                     <ul class="nav navbar-right panel_toolbox">
                                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -106,7 +107,7 @@
                                     <div id="wizard" class="form_wizard wizard_horizontal">
                                         <ul class="wizard_steps">
                                             <li>
-                                                <a href="#step-1">
+                                                <a id="step1" href="#step-1">
                                                     <span class="step_no">1</span>
                                                     <span class="step_descr">
                                             Datos del negocio<br />
@@ -115,7 +116,7 @@
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="#step-2">
+                                                <a id="step2" href="#step-2">
                                                     <span class="step_no">2</span>
                                                     <span class="step_descr">
                                             Datos de acceso del administrador<br />
@@ -124,7 +125,7 @@
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="#step-3">
+                                                <a id="step3" href="#step-3">
                                                     <span class="step_no">3</span>
                                                     <span class="step_descr">
                                             Datos personales del administrador<br />
@@ -135,7 +136,7 @@
 
                                         </ul>
                                         <div id="step-1">
-                                            <form class="form-horizontal form-label-left">
+                                            <form id="formNegocio" class="form-horizontal form-label-left">
 
                                                 <div class="form-group">
                                                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre-negocio">Nombre del negocio <span class="required">*</span>
@@ -171,6 +172,7 @@
                                                         <input id="tipo-negocio" class="form-control col-md-7 col-xs-12" type="text" name="tipo-negocio">
                                                     </div>
                                                 </div>
+                                                
                                             </form>
 
                                         </div>
@@ -248,6 +250,11 @@
             });
 
         });
+        
+    </script>
+    <script type="text/javascript">
+    	console.log("aquii");
+    	  	
     </script>
 
 </body>

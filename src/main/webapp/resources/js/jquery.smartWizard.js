@@ -83,7 +83,8 @@ function SmartWizard(target, options) {
         $this.target.append(elmActionBar);
         this.contentWidth = $this.elmStepContainer.width();
 
-        $($this.buttons.next).click(function() {
+        $($this.buttons.next).click(function() {            
+            
             $this.goForward();
             return false;
         });
@@ -105,6 +106,26 @@ function SmartWizard(target, options) {
                     }
                 }
             }
+            
+            //Submit formulario
+            console.log("Submitir");
+            //Si la pantalla es "primeraCarga"
+            if ($('#primeraCarga') != undefined)
+            {
+            	//Cargar formulario de datos de negocio
+            	var formNegocio = $('#formNegocio');
+            	
+            	var negocio = new Object();
+            	negocio.nombre = $("#nombre-negocio").val();
+            	negocio.direccion  = $("#direccion-negocio").val();
+            	negocio.telefono = $("#telefono-negocio").val();
+            	negocio.tipo = $("#url-negocio").val();
+            	negocio.url = $("#tipo-negocio").val();
+            	
+            	enviarAjaxNuevoNegocio("ajax/negocio/nuevoNegocio",negocio);	
+            }
+            
+            
             return false;
         });
 
@@ -264,6 +285,9 @@ function SmartWizard(target, options) {
         $(selStep, $this.target).removeClass("disabled");
         $(selStep, $this.target).removeClass("done");
         $(selStep, $this.target).addClass("selected");
+        
+        var numeroPaso = $(selStep, $this.target).attr('id');
+        console.log("Paso: "+numeroPaso);
 
         $(selStep, $this.target).attr("isDone",1);
 
@@ -487,3 +511,34 @@ function SmartWizard(target, options) {
     };
 
 })(jQuery);
+
+function enviarAjaxNuevoNegocio(url, contenido)
+{
+	$.ajax({
+		type : "POST",
+		contentType : "application/json",
+		url : url,
+		data : JSON.stringify(contenido),
+		dataType : 'json',
+		timeout : 100000,
+		success : function(data) {
+			console.log("SUCCESS: ", data);
+			if (data.codRespuesta != 0)
+			{
+				var error = $('#estadoFormulario');
+				error.empty();
+				error.append("Error: "+data.respuesta);
+			}
+		},
+		error : function(e) {
+			console.log("ERROR: ", e);
+			var error = $('#estadoFormulario');
+			error.empty();
+			error.append("Error desconocido");
+			//display(e);
+		},
+		done : function(e) {
+			console.log("DONE");
+		}
+	});	
+}
