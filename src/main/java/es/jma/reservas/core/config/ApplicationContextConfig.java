@@ -16,6 +16,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import es.jma.reservas.core.dominio.citas.Cita;
@@ -51,9 +54,20 @@ import es.jma.reservas.core.servicios.impl.ServiciosUsuario;
  */
 @Configuration
 @ComponentScan("es.jma.reservas")
+@EnableWebMvc
 @EnableTransactionManagement
-public class ApplicationContextConfig {
-	
+public class ApplicationContextConfig extends WebMvcConfigurerAdapter{
+	/**
+	 * Ubicación de recursos estáticos
+	 */
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry
+            .addResourceHandler("/resources/**")
+            .addResourceLocations("/resources/")
+        ;
+    }
+    
 	/**
 	 * Ubicación de los jsp
 	 * @return
