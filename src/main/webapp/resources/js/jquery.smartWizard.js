@@ -121,6 +121,23 @@ function SmartWizard(target, options) {
             	negocio.telefono = $("#telefono-negocio").val();
             	negocio.tipo = $("#url-negocio").val();
             	negocio.url = $("#tipo-negocio").val();
+            	negocio.personas = new Array();
+            	
+            	//Cargar formulario de datos de usuario
+            	var formUsuario = $('#formUsuario');
+            	var usuario = new Object();
+            	usuario.email = $("#email-admin").val();
+            	usuario.password = $("#password-admin").val();
+            	
+            	//Cargar formulario de datos personales
+            	var formPersona = $('#formPersona');
+            	var persona = new Object();
+            	persona.nombre = $("#nombre-admin").val();
+            	persona.apellidos = $("#apellidos-admin").val();
+            	persona.dni = $("#dni-admin").val();
+            	persona.usuario = usuario;
+            	
+            	negocio.personas.push(persona);
             	
             	enviarAjaxNuevoNegocio("ajax/negocio/nuevoNegocio",negocio);	
             }
@@ -523,16 +540,26 @@ function enviarAjaxNuevoNegocio(url, contenido)
 		timeout : 100000,
 		success : function(data) {
 			console.log("SUCCESS: ", data);
+			//Si hay algún en la validación del servidor, mostrarlo
 			if (data.codRespuesta != 0)
 			{
 				var error = $('#estadoFormulario');
+				error.removeClass("alert").removeClass("alert-danger");
+				error.addClass("alert").addClass("alert-danger");
 				error.empty();
-				error.append("Error: "+data.respuesta);
+				error.append(" <strong>Error: </strong>"+data.respuesta);
+			}
+			//En caso contrario, volver al login
+			else
+			{
+				window.location.href = '../';
 			}
 		},
 		error : function(e) {
 			console.log("ERROR: ", e);
 			var error = $('#estadoFormulario');
+			error.removeClass("alert").removeClass("alert-danger");
+			error.addClass("alert").addClass("alert-danger");
 			error.empty();
 			error.append("Error desconocido");
 			//display(e);

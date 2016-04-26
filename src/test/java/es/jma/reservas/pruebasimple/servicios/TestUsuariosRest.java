@@ -75,7 +75,7 @@ public class TestUsuariosRest {
 	 {
 			Usuario usuario = new Usuario();
 			usuario.setNivel(Usuario.NIVEL_EMPLEADO);
-			usuario.setNombreUsuario("jameskirk");
+			usuario.setEmail("jameskirk");
 			usuario.setPassword("capitan");
 			
 			try
@@ -124,7 +124,7 @@ public class TestUsuariosRest {
 			 
 				Usuario usuario = new Usuario();
 				usuario.setNivel(Usuario.NIVEL_EMPLEADO);
-				usuario.setNombreUsuario("jameskirk");
+				usuario.setEmail("jameskirk");
 				usuario.setPassword("capitan");
 				
 				Cliente cliente = new Cliente();
@@ -137,7 +137,7 @@ public class TestUsuariosRest {
 				
 				Usuario usuario2 = new Usuario();
 				usuario2.setNivel(Usuario.NIVEL_EMPLEADO);
-				usuario2.setNombreUsuario("billAdama");
+				usuario2.setEmail("billAdama");
 				usuario2.setPassword("almirante");
 				
 				Empleado empleado = new Empleado();
@@ -232,7 +232,7 @@ public class TestUsuariosRest {
 	 {
 			Usuario usuario = new Usuario();
 			usuario.setNivel(Usuario.NIVEL_EMPLEADO);
-			usuario.setNombreUsuario("jameskirk");
+			usuario.setEmail("jameskirk");
 			usuario.setPassword("capitan");
 			
 			Cliente cliente = new Cliente();

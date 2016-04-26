@@ -12,7 +12,7 @@ public class TestUsuarios {
 		//Crear usuario
 		Usuario usuario = FactoriaUsuario.crearCliente();
 		usuario.setId(1);
-		usuario.setNombreUsuario("PacoPorras");
+		usuario.setEmail("PacoPorras");
 		usuario.setPassword("caca");
 		
 		//Crear cliente

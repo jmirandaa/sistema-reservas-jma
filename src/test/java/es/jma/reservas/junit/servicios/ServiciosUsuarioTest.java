@@ -43,7 +43,7 @@ public class ServiciosUsuarioTest extends AbstractJUnit4SpringContextTests{
 	{
 		Usuario usuario = new Usuario();
 		usuario.setNivel(Usuario.NIVEL_EMPLEADO);
-		usuario.setNombreUsuario("jameskirk");
+		usuario.setEmail("jameskirk");
 		usuario.setPassword("capitan");
 		return usuario;
 	}
@@ -62,22 +62,22 @@ public class ServiciosUsuarioTest extends AbstractJUnit4SpringContextTests{
 			serviciosUsuario.nuevo(usuario);
 			
 			//Consultar y comprobar coincidencia
-			Usuario consultado = serviciosUsuario.consultarUsuarioNombreUsuario(usuario.getNombreUsuario());
+			Usuario consultado = serviciosUsuario.consultarUsuarioNombreUsuario(usuario.getEmail());
 			assertEquals(usuario, consultado);
 			
 			//Modificar
-			consultado.setNombreUsuario("spock");
+			consultado.setEmail("spock");
 			consultado.setNivel(Usuario.NIVEL_EMPLEADO);
 			consultado.setPassword("vulcaniano");
 			
 			serviciosUsuario.actualizar(consultado);
 			//Consultar
-			Usuario consultadoAct = serviciosUsuario.consultarUsuarioNombreUsuario(consultado.getNombreUsuario());
+			Usuario consultadoAct = serviciosUsuario.consultarUsuarioNombreUsuario(consultado.getEmail());
 			assertEquals(consultadoAct, consultado);
 			
 			//Borrar
 			serviciosUsuario.borrar(consultado);
-			Usuario consultadoBorrado = serviciosUsuario.consultarUsuarioNombreUsuario(consultado.getNombreUsuario());
+			Usuario consultadoBorrado = serviciosUsuario.consultarUsuarioNombreUsuario(consultado.getEmail());
 			assertNotEquals(consultadoBorrado, consultado);
 		}
 		catch (Exception e)

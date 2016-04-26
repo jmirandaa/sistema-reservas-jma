@@ -91,7 +91,7 @@
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="x_panel">
                                 <div class="x_title">
-                                	<p id="estadoFormulario" class="errorAjax"></p>
+                                	<div id="estadoFormulario"></div>
                                     <h2>Datos iniciales</h2>
                                     <ul class="nav navbar-right panel_toolbox">
                                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -177,22 +177,54 @@
 
                                         </div>
                                         <div id="step-2">
-                                            <h2 class="StepTitle">Step 2 Content</h2>
-                                            <p>
-                                                do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                                            </p>
-                                            <p>
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                                            </p>
+                                            <form id="formUsuario" class="form-horizontal form-label-left">
+
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email-admin">Email del administrador <span class="required">*</span>
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <input type="text" name="email-admin" id="email-admin" required="required" class="form-control col-md-7 col-xs-12">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="password-admin">Contraseña del administrador<span class="required">*</span>
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <input type="password" id="password-admin" name="password-admin" required="required" class="form-control col-md-7 col-xs-12">
+                                                    </div>
+                                                </div>                                                                          
+                                            </form>
                                         </div>
                                         <div id="step-3">
-                                            <h2 class="StepTitle">Step 3 Content</h2>
-                                            <p>
-                                                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                                            </p>
-                                            <p>
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                                            </p>
+                                            <form id="formPersona" class="form-horizontal form-label-left">
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre-admin">Nombre del administrador <span class="required">*</span>
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <input type="text" name="nombre-admin" id="nombre-admin" required="required" class="form-control col-md-7 col-xs-12">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="apellidos-admin">Apellidos del administrador<span class="required">*</span>
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <input type="text" id="apellidos-admin" name="apellidos-admin" required="required" class="form-control col-md-7 col-xs-12">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="dni-admin" class="control-label col-md-3 col-sm-3 col-xs-12">DNI <span class="required">*</span></label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <input id="dni-admin" class="form-control col-md-7 col-xs-12" type="text" name="dni-admin" required="required">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Fecha de nacimiento
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <input id="fecha-nacimiento" class="form-control col-md-7 col-xs-12" type="date" name="fecha-nacimiento">
+                                                    </div>
+                                                </div>                                                
+                                            </form>
                                         </div>
 
 

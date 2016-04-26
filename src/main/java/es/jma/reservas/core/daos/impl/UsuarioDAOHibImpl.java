@@ -170,9 +170,9 @@ public class UsuarioDAOHibImpl implements IUsuarioDAO {
 			String passwordCifrado=UtilCifrado.cifrarTexto(password);
 			
 			//Consultar bar por nombre
-			String hql = "from Usuario where nombreUsuario = :nombreUsuario and password = :password";
+			String hql = "from Usuario where email = :email and password = :password";
 			Query query = session.createQuery(hql);
-			query.setString("nombreUsuario", nombreUsuario);
+			query.setString("email", nombreUsuario);
 			query.setString("password",passwordCifrado);
 			@SuppressWarnings("unchecked")
 			List<Usuario> results = query.list();

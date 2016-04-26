@@ -71,10 +71,10 @@ public class ServiciosUsuario extends ServiciosHibernate implements
 				}
 				
 				//Buscar si el usuario ya existe
-				Usuario usuarioExistente = usuarioDAO.consultarUsuarioNombreUsuario(usuario.getNombreUsuario());
+				Usuario usuarioExistente = usuarioDAO.consultarUsuarioNombreUsuario(usuario.getEmail());
 				
 				//En caso de que no, crear
-				if (usuarioExistente.getNombreUsuario() == null)
+				if (usuarioExistente.getEmail() == null)
 				{
 					usuarioDAO.nuevo(usuario);
 					commit(tx);

@@ -32,7 +32,9 @@
       
        <%-- Mostrar mensaje de error en caso de fallo --%>
  		<c:if test="${not empty requestScope.msgError}">
- 			<p><c:out value="${requestScope.msgError}"></c:out></p>
+ 			<div class="alert alert-danger">
+  				<strong><c:out value="${requestScope.msgError}"></c:out></strong>
+			</div>
  		</c:if>
 
     </div> <!-- /container -->
