@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import es.jma.reservas.core.dominio.negocio.Negocio;
+import es.jma.reservas.core.dominio.usuarios.Usuario;
 import es.jma.reservas.core.servicios.IServiciosNegocio;
 import es.jma.reservas.core.servicios.IServiciosUsuario;
 
@@ -66,6 +67,7 @@ public class InicioController {
 			if (negocios.size() == 0)
 			{
 				pagina = KPaginas.PRIMERA_CARGA;
+				//pagina = KPaginas.PANEL_PRINCIPAL;
 			}
 			else
 			{	
@@ -74,7 +76,12 @@ public class InicioController {
 				
 				if (datosCorrectos)
 				{
-					//Si los datos son correctos, ir a la página principal
+					//Recuperar los datos del usuario
+					Usuario usuarioSesion = serviciosUsuario.consultarUsuarioNombreUsuario(usuario);
+					
+					//Guardar el negocio y usuario en la sesión
+					session.setAttribute(KAtributos.NEGOCIO, negocios.get(0));
+					session.setAttribute(KAtributos.USUARIO, usuarioSesion);
 					pagina = KPaginas.PANEL_PRINCIPAL;
 				}
 				else
@@ -87,8 +94,15 @@ public class InicioController {
 		catch (Exception e)
 		{
 			e.printStackTrace();
+			req.setAttribute(KPaginas.Mensajes.KEY_ERROR, e.getMessage());
 		}
 		
 		return pagina;
+	}
+	
+	@RequestMapping(value = "controladores/principal.do", method = RequestMethod.GET)
+	public String paginaPrincipal(Model model, HttpServletRequest req, HttpSession session)
+	{
+		return KPaginas.PANEL_PRINCIPAL;
 	}
 }

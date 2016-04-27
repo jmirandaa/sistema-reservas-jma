@@ -59,9 +59,39 @@
 
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="x_panel">
-
+				                <div class="x_title">
+				                  <h2>Listado de empleados</h2>
+				                  <div class="clearfix"></div>
+				                </div>
                                 <div class="x_content">
-                                   <p>Esta es la página principal de administración.</p>
+					              <table class="table table-striped">
+					                    <thead>
+					                      <tr>
+					                        <th>id</th>
+					                        <th>Nivel</th>
+					                        <th>Email</th>
+					                        <th>Nombre</th>
+					                        <th>Apellidos</th>
+					                        <th>DNI</th>
+					                        <th>Fecha nacimiento</th>
+					                        <th></th>
+					                        <th></th>
+					                      </tr>
+					                    </thead>
+					                    <tbody>
+					                      <tr>
+					                        <th scope="row">1</th>
+					                        <td>Admin</td>
+					                        <td>Mark</td>
+					                        <td>Otto</td>
+					                        <td>@mdo</td>
+					                        <td>66666666Z</td>
+					                        <td>06/06/1986</td>
+					                        <td>Ver</td>
+					                        <td>Borrar</td>
+					                      </tr>
+					                    </tbody>
+					                  </table>
                                 </div>
                             </div>
                         </div>

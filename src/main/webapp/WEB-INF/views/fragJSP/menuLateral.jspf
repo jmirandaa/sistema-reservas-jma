@@ -1,0 +1,39 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+                    <!-- sidebar menu -->
+                    <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+
+                        <div class="menu_section">
+                            <h3>General</h3>
+                            <ul class="nav side-menu">
+                                <li><a><i class="fa fa-users"></i> Usuarios <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu" style="display: none">
+                                        <li><a href="empleados.do">Empleados</a>
+                                        </li>
+                                        <li><a href="clientes.do">Clientes</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><a><i class="fa fa-briefcase"></i> Negocio <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu" style="display: none">
+                                        <li><a href="negocio.do">Datos</a>
+                                        </li>
+                                        <li><a href="servicios.do">Servicios</a>
+                                        </li>
+                                        <li><a href="horarios.do">Horarios</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><a><i class="fa fa-calendar-o"></i> Citas <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu" style="display: none">
+                                        <li><a href="general_elements.html">Ver</a>
+                                        </li>
+
+                                    </ul>
+                                </li>
+
+                            </ul>
+                        </div>
+
+                    </div>
+                    <!-- /sidebar menu -->

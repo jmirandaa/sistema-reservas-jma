@@ -139,9 +139,9 @@ public class UsuarioDAOHibImpl implements IUsuarioDAO {
 		try
 		{
 			//Consultar bar por nombre
-			String hql = "from Usuario where nombreUsuario = :nombreUsuario";
+			String hql = "from Usuario where email = :email";
 			Query query = session.createQuery(hql);
-			query.setString("nombreUsuario", nombreUsuario);
+			query.setString("email", nombreUsuario);
 			@SuppressWarnings("unchecked")
 			List<Usuario> results = query.list();
 			
